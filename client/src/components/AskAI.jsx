@@ -19,13 +19,14 @@ export const AskAI = () => {
 
         const questionBox = document.getElementById('question')
         const question = e.target.question.value
-        console.log(`You asked this  : ${question}`)
+        // console.log(`You asked this  : ${question}`)
         questionBox.value = ''
         addDiv(`${question}`)
 
         askQuestion(question)
         .then((res) => {
-            console.log(`Here is the response: ${res}`)    
+            console.log("Here is the response", res)
+            addDiv(res)    
         }) 
         .catch ((err) => {
             console.log(err);

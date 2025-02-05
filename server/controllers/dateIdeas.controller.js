@@ -7,7 +7,7 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export const askQuestion = async(req, res, next) => {
     const { question } = req.body
-    console.log(`This is the request body ${question} `, req.body)
+    // console.log(`This is the request body ${question} `, req.body)
     try {
         const completion = await openai.chat.completions.create({
         model: "gpt-4o-mini",
