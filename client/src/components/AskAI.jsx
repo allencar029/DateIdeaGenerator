@@ -13,6 +13,17 @@ export const AskAI = () => {
             <div key={prevDivs.length}>{text}</div>
         ])
     }
+
+    const questionAsk = document.getElementById('question')
+    console.log(questionAsk)
+    if(questionAsk){
+        questionAsk.addEventListener('keydown', (e) => {
+            console.log('keydown event:', e.key)
+            if(e.key === 'Enter' && !e.shiftKey) {
+                handleSubmit()
+            }
+        })
+    }
     
     const handleSubmit = (e) => {
         e.preventDefault()
