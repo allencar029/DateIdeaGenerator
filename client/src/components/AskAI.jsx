@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ResponseAI } from '../views/ResponseAI'
 import { askQuestion } from '../services/dateIdeas.services.js';
@@ -14,23 +14,33 @@ export const AskAI = () => {
         ])
     }
 
-    const questionAsk = document.getElementById('question')
-    console.log(questionAsk)
-    if(questionAsk){
-        questionAsk.addEventListener('keydown', (e) => {
-            console.log('keydown event:', e.key)
-            if(e.key === 'Enter' && !e.shiftKey) {
-                handleSubmit()
+    useEffect(() => {
+        const questionAsk = document.getElementById("question");
+
+        const handleKeyPress = (e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                handleSubmit(e);
             }
-        })
-    }
+        }
+    
+        if (questionAsk) {
+            questionAsk.addEventListener("keydown", handleKeyPress);
+        }
+    
+        return () => {
+            if (questionAsk) {
+                questionAsk.removeEventListener("keydown", handleKeyPress); // ✅ Clean up
+            }
+        }
+    }, [])
     
     const handleSubmit = (e) => {
         e.preventDefault()
 
         const questionBox = document.getElementById('question')
-        const question = e.target.question.value
-        // console.log(`You asked this  : ${question}`)
+        const question = questionBox.value
+        console.log(`You asked this  : ${question}`)
         questionBox.value = ''
         addDiv(`${question}`)
 
