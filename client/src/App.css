@@ -18,4 +18,13 @@
   padding: 5px;
   border: 1px solid gainsboro;
   border-radius: 10px;
+  display: flex;
+
+}
+
+#submit-button { 
+  width: 25px;
+  font-size: 10px;
+  height: 25px;
+  border-radius: 50%;
 }
