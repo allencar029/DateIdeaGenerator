@@ -4,7 +4,6 @@ import { ResponseAI } from '../views/ResponseAI'
 import { askQuestion } from '../services/dateIdeas.services.js';
 
 export const AskAI = () => {
-    const navigate = useNavigate()
     const [divs, setDivs] = useState([])
 
     const addDiv = (text) => {
@@ -15,22 +14,32 @@ export const AskAI = () => {
     }
 
     useEffect(() => {
-        const questionAsk = document.getElementById("question");
+        const questionAsk = document.getElementById("question")
+        const button = document.getElementById("submit-button")
+        const box = document.getElementById("askAIButtonText")
+
+        const adjustHeight = () => {
+            questionAsk.style.height = "auto"
+            questionAsk.style.height = questionAsk.scrollHeight + "px"
+        }
+
+        questionAsk.addEventListener("input", adjustHeight)
 
         const handleKeyPress = (e) => {
             if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                handleSubmit(e);
+                e.preventDefault()
+                handleSubmit(e)
             }
         }
     
         if (questionAsk) {
-            questionAsk.addEventListener("keydown", handleKeyPress);
+            questionAsk.addEventListener("keydown", handleKeyPress)
         }
     
         return () => {
+            questionAsk.removeEventListener("input", adjustHeight)
             if (questionAsk) {
-                questionAsk.removeEventListener("keydown", handleKeyPress); // ✅ Clean up
+                questionAsk.removeEventListener("keydown", handleKeyPress)
             }
         }
     }, [])
@@ -61,7 +70,7 @@ export const AskAI = () => {
         <div>
             <ResponseAI divs={divs} />
             <form onSubmit = { handleSubmit }>
-                <div className="form_group">
+                <div className="form_group" id="askAIButtonText">
                     <textarea className="ask_ai" type="text" id="question" name="question" placeholder="Ask a question...."></textarea>
                     <button id="submit-button"></button>
                 </div>

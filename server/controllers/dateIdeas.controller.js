@@ -12,7 +12,7 @@ export const askQuestion = async(req, res, next) => {
         const completion = await openai.chat.completions.create({
         model: "gpt-4o-mini",
         messages: [
-            { role: "system", content: "You are a helpful assistant." },
+            { role: "system", content: "You help create productive schedules so that people can be the most productive they can be" },
             {
                 role: "user",
                 content: `${question}`,
