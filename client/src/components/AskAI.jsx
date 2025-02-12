@@ -15,9 +15,7 @@ export const AskAI = () => {
 
     useEffect(() => {
         const questionAsk = document.getElementById("question")
-        const button = document.getElementById("submit-button")
-        const box = document.getElementById("askAIButtonText")
-
+        
         const adjustHeight = () => {
             questionAsk.style.height = "auto"
             questionAsk.style.height = questionAsk.scrollHeight + "px"
